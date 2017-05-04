@@ -5,6 +5,7 @@ class Inventory extends React.Component {
 
 
   render() {
+	  console.log("render Inventory");
     return(
       <div>
         <h2>Inventory</h2>

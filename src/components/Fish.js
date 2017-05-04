@@ -1,18 +1,23 @@
 import React from 'react';
 import { formatPrice } from '../helpers';
 
-class Fish extends React.Component {
+class Fish extends React.PureComponent {
   render() {
-    const { details } = this.props;
-
+    const {
+		image,
+		name,
+		price,
+		desc
+	} = this.props;
+	
     return(
       <li className="menu-fish">
-        <img src={details.image} alt={details.name} />
+        <img src={image} alt={name} />
         <h3 className="fish-name">
-          {details.name}
-          <span className="price">{ formatPrice(details.price) }</span>
+          {name}
+          <span className="price">{ formatPrice(price) }</span>
         </h3>
-        <p>{details.desc}</p>
+        <p>{desc}</p>
         <button>Add To Order</button>
       </li>
     )
