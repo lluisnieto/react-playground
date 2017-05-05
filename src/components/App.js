@@ -3,7 +3,6 @@ import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
 import sampleFishes from '../sample-fishes';
-import sampleFishes2 from '../sample-fishes-2';
 import Fish from './Fish';
 import base from '../base';
 
@@ -59,13 +58,17 @@ class App extends React.Component {
 		});
 	}
 
+	updateFish(key, updatedFish) {
+		const fishes = {
+			...this.state.fishes
+		};
+		fishes[key] = updatedFish;
+		this.setState({ fishes });
+	}
+
 	loadSamples() {
-
-		const rand =  Math.floor(Math.random() * (1 - 0 + 1)) + 0;
-		const newFishes = rand === 0 ? sampleFishes : sampleFishes2;
-
 		this.setState({
-		  fishes: newFishes
+		  fishes: sampleFishes
 		});
 	}
 
@@ -112,6 +115,8 @@ class App extends React.Component {
         <Inventory
 			addFish={this.addFish.bind(this)}
 			loadSamples={this.loadSamples.bind(this)}
+			updateFish={this.updateFish.bind(this)}
+			fishes={this.state.fishes}
 		/>
       </div>
     )
