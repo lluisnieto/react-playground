@@ -5,6 +5,7 @@ import Inventory from './Inventory';
 import sampleFishes from '../sample-fishes';
 import sampleFishes2 from '../sample-fishes-2';
 import Fish from './Fish';
+import base from '../base';
 
 class App extends React.Component {
 
@@ -13,34 +14,46 @@ class App extends React.Component {
       	order: {}
 	}
 
-  addFish(fish) {
-    // update our state
-    const fishes = {
-		...this.state.fishes
-	};
+	componentWillMount() {
 
-    // add in our new fish
-    const timestamp = Date.now();
-    fishes[`fish-${timestamp}`] = fish;
+		this.ref = base.syncState(this.props.params.storeId + `/fishes`, {
+			context: this,
+			state: 'fishes'
+		});
+	}
 
-    // set state
-    this.setState({
-		fishes: fishes
-	});
-  }
+	componentWillUnmount() {
+		base.removeBinding(this.ref);
+	}
 
-  loadSamples() {
+	addFish(fish) {
+		// update our state
+		const fishes = {
+			...this.state.fishes
+		};
 
-	const rand =  Math.floor(Math.random() * (1 - 0 + 1)) + 0;
-	const newFishes = rand === 0 ? sampleFishes : sampleFishes2;
+		// add in our new fish
+		const timestamp = Date.now();
+		fishes[`fish-${timestamp}`] = fish;
 
-    this.setState({
-      fishes: newFishes
-    });
-  }
+		// set state
+		this.setState({
+			fishes: fishes
+		});
+	}
 
-  renderFishes() {
-	  return Object.keys(this.state.fishes).map((key) => {
+	loadSamples() {
+
+		const rand =  Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+		const newFishes = rand === 0 ? sampleFishes : sampleFishes2;
+
+		this.setState({
+		  fishes: newFishes
+		});
+	}
+
+	renderFishes() {
+		return Object.keys(this.state.fishes).map((key) => {
 		  return (
 			  <Fish
 				  key={key}
@@ -49,8 +62,8 @@ class App extends React.Component {
 				  {...this.state.fishes[key]}
 			  />
 		  );
-	  });
-  }
+		});
+	}
 
   addToOrder(key) {
 	  // take a copy of our state
