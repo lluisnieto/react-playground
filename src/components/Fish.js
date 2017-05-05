@@ -7,9 +7,14 @@ class Fish extends React.PureComponent {
 		image,
 		name,
 		price,
-		desc
+		desc,
+		status,
+		index
 	} = this.props;
-	
+
+	const isAvailable = status === 'available';
+	const buttonText = isAvailable ? 'Add to Order' : 'Sold Out!';
+
     return(
       <li className="menu-fish">
         <img src={image} alt={name} />
@@ -18,7 +23,10 @@ class Fish extends React.PureComponent {
           <span className="price">{ formatPrice(price) }</span>
         </h3>
         <p>{desc}</p>
-        <button>Add To Order</button>
+        <button
+			disabled={!isAvailable}
+			onClick={this.props.addToOrder.bind(this, index)}
+		>{ buttonText }</button>
       </li>
     )
   }

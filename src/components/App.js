@@ -44,10 +44,21 @@ class App extends React.Component {
 		  return (
 			  <Fish
 				  key={key}
+				  index={key}
+				  addToOrder={this.addToOrder.bind(this)}
 				  {...this.state.fishes[key]}
 			  />
 		  );
 	  });
+  }
+
+  addToOrder(key) {
+	  // take a copy of our state
+	  const order = {...this.state.order};
+	  // update or add the new number of fish ordered
+	  order[key] = order[key] + 1 || 1;
+	  // update our state
+	  this.setState({ order: order });
   }
 
   render() {
