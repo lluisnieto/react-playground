@@ -43,7 +43,6 @@ class Order extends React.Component {
 						{formatPrice(total)}
 					</li>
 				</ul>
-				<p>{orderIds}</p>
 
 			</div>
 		)
