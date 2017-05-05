@@ -32,4 +32,14 @@ class Fish extends React.PureComponent {
   }
 }
 
+Fish.propTypes = {
+	image: React.PropTypes.string.isRequired,
+	name: React.PropTypes.string.isRequired,
+	price: React.PropTypes.number.isRequired,
+	desc: React.PropTypes.string.isRequired,
+	status: React.PropTypes.string.isRequired,
+	index: React.PropTypes.string.isRequired,
+	addToOrder: React.PropTypes.func.isRequired
+}
+
 export default Fish;
