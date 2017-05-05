@@ -15,6 +15,7 @@ class Inventory extends React.Component {
 	renderInventory(key){
 		const fish = this.props.fishes[key];
 
+
 		return(
 			<div
 				className="fish-edit"
@@ -58,6 +59,7 @@ class Inventory extends React.Component {
 					value={fish.image}
 					onChange={this.handleChange.bind(this, key)}
 				/>
+				<button onClick={this.props.removeFish.bind(this, key)}>Remove Fish</button>
 			</div>
 		);
 	}
